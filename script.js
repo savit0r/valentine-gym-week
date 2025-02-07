@@ -1,4 +1,3 @@
-
         const daysData = [
             {
                 valentine: "Rose Day (Feb 7)",
@@ -112,9 +111,18 @@
         }
 
         function toggleTheme() {
-            document.body.setAttribute('data-theme',
-                document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
-            );
+            const body = document.body;
+            const themeButton = document.getElementById('themeButton');
+            
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                themeButton.innerHTML = '<i class="fas fa-sun"></i>';
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                body.classList.add('dark-mode');
+                themeButton.innerHTML = '<i class="fas fa-moon"></i>';
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
         }
 
         createCalendar();

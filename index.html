@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine's to Workout Calendar</title>
     <link rel="stylesheet" href="style.css">
-   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Valentine's Week → Workout Week</h1>
-            <button class="theme-toggle" onclick="toggleTheme()"> Dark Mode</button>
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeButton">
+                <i class="fas fa-sun"></i>
+            </button>
             <p>Click on cards to transform them into workout days!</p>
         </div>
         <div class="calendar" id="calendar"></div>

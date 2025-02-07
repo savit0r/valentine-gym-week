@@ -1,0 +1,262 @@
+:root {
+    --gradient-1: linear-gradient(135deg, #67528cd2, #8700fe5c);
+    --gradient-2: linear-gradient(135deg, #7a5a9c, #6c4fa6);
+    --gradient-hover: linear-gradient(135deg, #667eea, #764ba2);
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #2d3436;
+    --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --card-radius: 16px;
+}
+
+[data-theme="dark"] {
+    --gradient-1: linear-gradient(135deg, #5f2c82, #49a09d);
+    --gradient-2: linear-gradient(135deg, #24243e, #302b63);
+    --gradient-hover: linear-gradient(135deg, #bc4e9c, #f80759);
+    --bg-color: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text-color: #ffffff;
+    --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--gradient-1);
+    border-radius: var(--card-radius);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, #e0e0e0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle {
+    background: var(--gradient-2);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 1rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.day-card {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg);
+    border-radius: var(--card-radius);
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.day-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-hover);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.day-card:hover::before {
+    opacity: 1;
+}
+
+.day-card.active::before {
+    opacity: 1;
+}
+
+.day-title {
+    position: relative;
+    z-index: 1;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.valentine-title, .workout-title {
+    transition: all 0.4s ease;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.workout-title {
+    opacity: 0;
+}
+
+.day-card:hover .valentine-title,
+.day-card.active .valentine-title {
+    opacity: 0;
+}
+
+.day-card:hover .workout-title,
+.day-card.active .workout-title {
+    opacity: 1;
+    color: white;
+}
+
+.workout-details {
+    position: relative;
+    z-index: 1;
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: white;
+}
+
+.workout-details.active {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+.workout-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.workout-list li {
+    margin: 0.8rem 0;
+    padding: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.workout-list li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.footer-text {
+    text-align: center;
+    margin-top: 2rem;
+    color: #6c757d;
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    z-index: 10;
+}
+
+.footer-link {
+    color: #6c757d;
+    text-decoration: none;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar {
+        grid-template-columns: 1fr;
+    }
+    .header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .calendar {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .day-card {
+        align-self: start;
+    }
+
+    /* Add styling for the last card */
+    .day-card:last-child {
+        grid-column: 2;  /* Place in middle column */
+        grid-row: 3;     /* Place in third row */
+    }
+}
+
+@media (min-width: 768px) {
+    .footer-text {
+        position: fixed;
+        bottom: 1rem;
+        left: 0;
+        right: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer-text {
+        position: relative;
+        margin-top: 3rem;
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+}
